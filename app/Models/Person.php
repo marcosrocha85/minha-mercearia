@@ -31,6 +31,7 @@ class Person extends Model
         'city',
         'state',
         'postal_code',
+        'person_type',
     ];
 
     /**
