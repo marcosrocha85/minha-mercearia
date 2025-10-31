@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Person;
 
 class User extends Authenticatable
 {
@@ -44,5 +45,21 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Relacionamento com Person (dados pessoais).
+     */
+    public function person()
+    {
+        return $this->belongsTo(Person::class, 'person_id');
+    }
+
+    /**
+     * Conveniência para checar se o usuário é funcionário.
+     */
+    public function isEmployee(): bool
+    {
+        return isset($this->role) && $this->role === 'employee';
     }
 }
